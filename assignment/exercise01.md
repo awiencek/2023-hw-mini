@@ -65,6 +65,7 @@ Did you have the right answer -- what does the program print out?
 #### Answer 1
 before running:
 10 loops, 1second
+
 we predict it will take 10 seconds to run
 
 actual output (sleep_time): 10.012 seconds
