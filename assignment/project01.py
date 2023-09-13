@@ -84,3 +84,24 @@ t_good = [x for x in t if x is not None]
 # how to print the average, min, max response time?
 
 print(t_good)
+if bool(t_good) != 0:
+    max_time = max(t_good)
+    min_time = min(t_good)
+    avg_time = sum(t_good)/len(t_good)
+else:
+    max_time = None
+    min_time = None
+    avg_time = None
+
+params["min_response_time"] = min_time
+params["max_response_time"] = max_time
+params["avg_response_time"] = avg_time
+params["score"] = f"misses {misses} / {N} times"
+
+try:
+    with open("project01.json", "w") as json_file:
+        json.dump(params, json_file)
+    print("Parameter value updated successfully.")
+except OSError as e:
+    print("Error writing to JSON file:", e)
+
