@@ -5,15 +5,38 @@ Response time - single-threaded
 from machine import Pin
 import time
 import random
+import os
+import json
 
+def get_params(param_file: str) -> dict:
+    """Reads parameters from a JSON file."""
+
+    if not is_regular_file(param_file):
+        raise OSError(f"File {param_file} not found")
+
+    with open(param_file) as f:
+        params = json.load(f)
+
+    return params
+
+
+def is_regular_file(path: str) -> bool:
+    """Checks if a regular file exists."""
+
+    S_IFREG = 0x8000
+
+    try:
+        return os.stat(path)[0] & S_IFREG != 0
+    except OSError:
+        return False
 
 led = Pin("LED", Pin.OUT)
 button = Pin(16, Pin.IN, Pin.PULL_UP)
 
-N: int = 5
-sample_ms = 10.0
-on_ms = 500
-
+params = get_params("project01.json")
+N: int = params["num_flash"]
+sample_ms = params["sample_ms"]
+on_ms = params["on_ms"]
 
 def random_time_interval(tmin: float, tmax: float) -> float:
     """return a random time interval between max and min"""
