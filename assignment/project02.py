@@ -56,7 +56,8 @@ def blinker(N: int) -> None:
         time.sleep(0.1)
 
 
-t: list[float | None] = []
+t1: list[float | None] = []
+t2: list[float | None] = []
 
 blinker(3)
 
@@ -66,13 +67,23 @@ for i in range(N):
     led.high()
 
     tic = time.ticks_ms()
-    t0 = None
+    t01 = None
+    t02 = None
     while time.ticks_diff(time.ticks_ms(), tic) < on_ms:
-        if button.value() == 0:
-            t0 = time.ticks_diff(time.ticks_ms(), tic)
+        if button01.value() == 0:
+            t01 = time.ticks_diff(time.ticks_ms(), tic)
             led.low()
             break
-    t.append(t0)
+        elif button02.value() == 0:
+            t02 = time.ticks_diff(time.ticks_ms(), tic)
+            led.low()
+            break
+        elif button01.value() == 0 and button02.value() ==0:
+            t01 =time.ticks_diff(time.ticks_ms(), tic)
+            t02 = t01
+            break
+    t.append(t01)
+    t.append(t02)
 
     led.low()
 
