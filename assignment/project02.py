@@ -73,15 +73,20 @@ for i in range(N):
         if button01.value() == 0 and button02.value() == 0:
             t01 =time.ticks_diff(time.ticks_ms(), tic)
             t02 = t01
+            led.low()
             break
         elif button01.value() == 0:
             t01 = time.ticks_diff(time.ticks_ms(), tic)
-            led.low()
-            break
+            if button02.value() == 0:
+                t02 = time.ticks_diff(time.ticks_ms(), tic)
+                led.low()
+                break
         elif button02.value() == 0:
             t02 = time.ticks_diff(time.ticks_ms(), tic)
-            led.low()
-            break
+            if button01.value() == 0:
+                t01 = time.ticks_diff(time.ticks_ms(), tic)
+                led.low()
+                break
         
     t.append(t01)
     t.append(t02)
