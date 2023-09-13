@@ -1,0 +1,9 @@
+{
+    "num_flash": 5,
+    "sample_ms": 10.0,
+    "on_ms": 500,
+    "min_response_time": 0,
+    "max_response_time": 0,
+    "avg_response_time": 0,
+    "score": ""
+}
